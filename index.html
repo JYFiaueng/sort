@@ -8,6 +8,7 @@
 		strong{
 			background-color: #aaa;
 		}
+		#jisuan span{display: none;}
 	</style>
 </head>
 <body>
@@ -85,7 +86,7 @@
 </table>
 
 <div>
-	<h3 id="jisuan">计算中...</h3>
+	<h3 id="jisuan">计算中<span>.</span><span>.</span><span>.</span></h3>
 	<ul id="sort"></ul>
 	<p>单位毫秒</p>
 </div>
@@ -101,11 +102,27 @@
 
 	var sortList = document.getElementById('sort');
 	var jisuan = document.getElementById('jisuan');
+	var span = document.querySelectorAll('#jisuan span');
+	var s = 0;
+	var id;
+	id = setInterval(function(){
+		if(s > 2){
+			s = 0;
+			for(var i = 0;i < 3; i++){
+				span[i].style.display = 'none';
+			}
+			return;
+		}
+		span[s].style.display = 'inline-block';
+		s++;
+	}, 500);
 	var fnjisuan = function(){
 		var sortChild = sortList.children;
 		console.log(sortChild.length);
 		if(sortChild.length === sort.length){
 			jisuan.innerHTML = '计算完成';
+			clearInterval(id);
+			console.log('计算停止');
 		}
 	};
 	//在指定区间产生小于区间差值个数的不重复的随机数，比如[a,b]个数为s，s不能超过b-a
