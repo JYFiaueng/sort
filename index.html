@@ -8,6 +8,10 @@
 		strong{
 			background-color: #aaa;
 		}
+		p{
+			word-break: break-all;
+			word-wrap: break-word;
+		}
 		#jisuan span{display: none;}
 	</style>
 </head>
@@ -19,10 +23,11 @@
 	<thead>
 		<tr>
 			<th>排序算法</th>
-			<th>平均事件复杂度</th>
+			<th>平均时间复杂度</th>
 			<th>最好情况</th>
 			<th>最坏情况</th>
 			<th>稳定性</th>
+			<th>空间复杂度</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -32,6 +37,7 @@
 			<td>O(n)</td>
 			<td>O(n^2)</td>
 			<td>稳定</td>
+			<td>O(1)</td>
 		</tr>
 		<tr>
 			<td>直接插入排序</td>
@@ -39,20 +45,7 @@
 			<td>O(n)</td>
 			<td>O(n^2)</td>
 			<td>稳定</td>
-		</tr>
-		<tr>
-			<td>归并排序</td>
-			<td>O(nlog2~n)</td>
-			<td>O(nlog2~n)</td>
-			<td>O(nlog2~n)</td>
-			<td>稳定</td>
-		</tr>
-		<tr>
-			<td>基数排序(桶排序)</td>
-			<td>O(d(n+rd))</td>
-			<td>O(d(n+rd))</td>
-			<td>O(rd)</td>
-			<td>稳定</td>
+			<td>O(1)</td>
 		</tr>
 		<tr>
 			<td>选择排序</td>
@@ -60,13 +53,31 @@
 			<td>O(n^2)</td>
 			<td>O(n^2)</td>
 			<td>不稳定</td>
+			<td>O(1)</td>
+		</tr>
+		<tr>
+			<td>归并排序</td>
+			<td>O(nlogn)</td>
+			<td>O(nlogn)</td>
+			<td>O(nlogn)</td>
+			<td>稳定</td>
+			<td>O(n)</td>
 		</tr>
 		<tr>
 			<td>快速排序</td>
-			<td>O(nlog2~n)</td>
-			<td>O(log2~n)</td>
+			<td>O(nlogn)</td>
+			<td>O(logn)</td>
 			<td>O(n^2)</td>
 			<td>不稳定</td>
+			<td>O(1)</td>
+		</tr>
+		<tr>
+			<td>基数排序(桶排序)</td>
+			<td>O(d(n+rd))</td>
+			<td>O(d(n+rd))</td>
+			<td>O(rd)</td>
+			<td>稳定</td>
+			<td>O(n+k)</td>
 		</tr>
 		<tr>
 			<td>希尔排序</td>
@@ -74,22 +85,27 @@
 			<td>O(n)</td>
 			<td>O(n^2)</td>
 			<td>不稳定</td>
+			<td>O(1)</td>
 		</tr>
 		<tr>
 			<td>堆排序</td>
-			<td>nlog2~n</td>
-			<td>nlog2~n</td>
-			<td>nlog2~n</td>
+			<td>O(nlogn)</td>
+			<td>O(nlogn)</td>
+			<td>O(nlogn)</td>
 			<td>不稳定</td>
+			<td>O(1)</td>
 		</tr>
 	</tbody>
 </table>
 
 <div>
 	<h3 id="jisuan">计算中<span>.</span><span>.</span><span>.</span></h3>
-	<ul id="sort"></ul>
 	<p>单位毫秒</p>
+	<ul id="sort"></ul>
 </div>
+
+<h3>数据</h1>
+<p id="data"></p>
 
 <script>
 	//web worker检测
@@ -149,6 +165,8 @@
 
 	//产生10万个不重复的随机数
 	var arr = getRandomNumberBetween(0, 100000, 100000);
+
+	data.innerHTML = arr
 
 	//排序
 	var sort = ['sort', 'bubbleSort', 'insertSort', 'selectSort', 'quickSort', 'shellSort', 'mergeSort', 'heapSort', 'radixSort'];
